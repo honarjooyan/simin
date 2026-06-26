@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta name="google-site-verification" content="61CyrTof54dAfIw9uaP1yYcMQ6VwOM-PWMUPxQfVGb4" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>✨ سیمین | زبان برنامه‌نویسی نقره‌ای</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a12 0%, #1a0a20 30%, #0f0f2a 60%, #0a0a12 100%);
+            color: #f0e8d8;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        /* ===== Background Stars ===== */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        /* ===== Container ===== */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== Header / Hero ===== */
+        .hero {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background: rgba(20, 20, 31, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(245, 197, 66, 0.05), transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(107, 200, 255, 0.05), transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero .logo-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero .logo-container img {
+            width: 120px;
+            height: 120px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(245, 197, 66, 0.15);
+            margin-bottom: 10px;
+            border: 2px solid rgba(245, 197, 66, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .hero .logo-container img:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f5c542 0%, #ff8a5c 40%, #f5c542 70%, #ffd93d 100%);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s ease-in-out infinite;
+            letter-spacing: 4px;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: #8a9aaa;
+            margin-top: 4px;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .subtitle span {
+            color: #f5c542;
+            font-weight: 500;
+        }
+
+        .hero .badge-container {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .badge {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 4px 18px;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            color: #8a9aaa;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero .badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .hero .badge .dot.green { background: #4ecdc4; }
+        .hero .badge .dot.yellow { background: #f5c542; }
+        .hero .badge .dot.blue { background: #6bc8ff; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* ===== Sections ===== */
+        .section {
+            background: rgba(20, 20, 31, 0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 28px 30px;
+            margin-bottom: 24px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section:hover {
+            border-color: rgba(245, 197, 66, 0.08);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f0e8d8;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title .icon {
+            font-size: 1.8rem;
+        }
+
+        .section-title .line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(245, 197, 66, 0.2), transparent);
+        }
+
+        .section p {
+            color: #b0b8c8;
+            line-height: 2;
+            font-size: 0.95rem;
+        }
+
+        .section p strong {
+            color: #f5c542;
+        }
+
+        /* ===== Code Block ===== */
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+            padding: 18px 22px;
+            margin: 12px 0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 2;
+            color: #d0d8e0;
+            overflow-x: auto;
+            direction: ltr;
+            text-align: left;
+            position: relative;
+        }
+
+        .code-block .comment {
+            color: #4a5a6a;
+            font-style: italic;
+        }
+
+        .code-block .keyword {
+            color: #ff6b8a;
+        }
+
+        .code-block .string {
+            color: #f5c542;
+        }
+
+        .code-block .number {
+            color: #6bc8ff;
+        }
+
+        .code-block .variable {
+            color: #4ecdc4;
+        }
+
+        .code-block .function {
+            color: #a78bfa;
+        }
+
+        .code-block .operator {
+            color: #ff8a5c;
+        }
+
+        /* ===== Command Grid ===== */
+        .command-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .command-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 12px 14px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .command-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(245, 197, 66, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .command-item .cmd {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #f5c542;
+            display: block;
+        }
+
+        .command-item .desc {
+            font-size: 0.6rem;
+            color: #8a9aaa;
+            margin-top: 4px;
+        }
+
+        /* ===== Function List ===== */
+        .func-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .func-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 8px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .func-item .name {
+            color: #a78bfa;
+            font-family: 'Courier New', monospace;
+        }
+
+        .func-item .desc {
+            color: #8a9aaa;
+            font-size: 0.65rem;
+        }
+
+        /* ===== Download Section ===== */
+        .download-box {
+            background: linear-gradient(135deg, rgba(245, 197, 66, 0.05), rgba(255, 138, 92, 0.05));
+            border: 1px solid rgba(245, 197, 66, 0.1);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .download-box .big-icon {
+            font-size: 3rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .download-box .url {
+            font-family: 'Courier New', monospace;
+            color: #f5c542;
+            font-size: 1.2rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            border: 1px solid rgba(245, 197, 66, 0.1);
+            transition: all 0.3s;
+        }
+
+        .download-box .url:hover {
+            background: rgba(245, 197, 66, 0.05);
+            border-color: rgba(245, 197, 66, 0.2);
+            transform: scale(1.02);
+        }
+
+        .download-box .url a {
+            color: #f5c542;
+            text-decoration: none;
+        }
+
+        /* ===== Status Badge ===== */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 107, 138, 0.08);
+            border: 1px solid rgba(255, 107, 138, 0.1);
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: #ff6b8a;
+        }
+
+        .status-badge .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ff6b8a;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            text-align: center;
+            padding: 30px 20px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 10px;
+        }
+
+        .footer .credit {
+            font-size: 0.85rem;
+            color: #8a9aaa;
+            letter-spacing: 1px;
+        }
+
+        .footer .credit .highlight {
+            color: #f5c542;
+            font-weight: 700;
+        }
+
+        .footer .credit .heart {
+            color: #ff6b8a;
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .footer .badge {
+            display: inline-block;
+            background: rgba(245, 197, 66, 0.05);
+            border: 1px solid rgba(245, 197, 66, 0.06);
+            padding: 2px 16px;
+            border-radius: 30px;
+            font-size: 0.55rem;
+            color: #6a5a3a;
+            margin-top: 6px;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .footer .version-info {
+            font-size: 0.6rem;
+            color: #4a5a6a;
+            margin-top: 6px;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 700px) {
+            body { padding: 12px; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero .logo-container img { width: 90px; height: 90px; }
+            .section { padding: 20px 16px; }
+            .section-title { font-size: 1.2rem; }
+            .command-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+            .func-list { grid-template-columns: 1fr; }
+            .code-block { font-size: 12px; padding: 14px 16px; }
+            .download-box .url { font-size: 0.9rem; padding: 6px 14px; }
+        }
+
+        @media (max-width: 400px) {
+            .hero h1 { font-size: 1.6rem; }
+            .hero .subtitle { font-size: 0.8rem; }
+            .hero .logo-container img { width: 70px; height: 70px; }
+            .command-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+            .command-item .cmd { font-size: 0.9rem; }
+        }
+
+        /* ===== Scrollbar ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.06); border-radius: 10px; }
+
+        /* ===== Smooth reveal ===== */
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: reveal 0.6s ease forwards;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
+        .section:nth-child(5) { animation-delay: 0.4s; }
+        .section:nth-child(6) { animation-delay: 0.5s; }
+        .section:nth-child(7) { animation-delay: 0.6s; }
+
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== Stars Background ===== -->
+<div class="stars" id="stars"></div>
+
+<!-- ===== Container ===== -->
+<div class="container">
+
+    <!-- ===== Hero ===== -->
+    <div class="hero">
+        <div class="logo-container">
+            <img src="https://uploadkon.ir/uploads/fe5425_26IMG-۲۰۲۶۰۶۲۴-۱۰۲۶۲۵-1.png" alt="لوگوی سیمین">
+            <h1>سیمین</h1>
+            <div class="subtitle">زبان برنامه‌نویسی <span>نقره‌ای</span></div>
+            <div class="badge-container">
+                <span class="badge"><span class="dot green"></span> نسخه ۲.۰</span>
+                <span class="badge"><span class="dot yellow"></span> در حال توسعه</span>
+                <span class="badge"><span class="dot blue"></span> متن‌باز</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== درباره سیمین ===== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon">✨</span>
+            درباره سیمین
+            <span class="line"></span>
+        </div>
+        <p>
+            <strong>سیمین</strong> یک زبان برنامه‌نویسی ساده، زیبا و قدرتمند است که با هدف 
+            <strong>یادگیری آسان</strong> و <strong>کدنویسی سریع</strong> طراحی شده است.
+            این زبان با الهام از پایتون ساخته شده اما دستورات آن <strong>کوتاه‌تر</strong> و 
+            <strong>ساده‌تر</strong> است تا مبتدیان بتوانند به راحتی برنامه‌نویسی را شروع کنند.
+        </p>
+        <p style="margin-top:10px;">
+            <span class="status-badge"><span class="pulse-dot"></span> این زبان در حال تکمیل است و روزبه‌روز بهتر می‌شود!</span>
+        </p>
+    </div>
+
+    <!-- ===== ویژگی‌ها ===== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon">⚡</span>
+            ویژگی‌های سیمین
+            <span class="line"></span>
+        </div>
+        <div class="command-grid">
+            <div class="command-item"><span class="cmd">.si.</span><span class="desc">شروع کد</span></div>
+            <div class="command-item"><span class="cmd">p</span><span class="desc">چاپ</span></div>
+            <div class="command-item"><span class="cmd">i</span><span class="desc">ورودی</span></div>
+            <div class="command-item"><span class="cmd">if/el</span><span class="desc">شرط</span></div>
+            <div class="command-item"><span class="cmd">for</span><span class="desc">حلقه</span></div>
+            <div class="command-item"><span class="cmd">while</span><span class="desc">حلقه تا</span></div>
+            <div class="command-item"><span class="cmd">def</span><span class="desc">تابع</span></div>
+            <div class="command-item"><span class="cmd">return</span><span class="desc">بازگشت</span></div>
+            <div class="command-item"><span class="cmd">[]</span><span class="desc">آرایه</span></div>
+            <div class="command-item"><span class="cmd">{}</span><span class="desc">دیکشنری</span></div>
+            <div class="command-item"><span class="cmd">time()</span><span class="desc">زمان</span></div>
+            <div class="command-item"><span class="cmd">date()</span><span class="desc">تاریخ</span></div>
+        </div>
+    </div>
+
+    <!-- ===== دستورات کامل ===== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon">📖</span>
+            راهنمای دستورات
+            <span class="line"></span>
+        </div>
+
+        <p><strong>📌 شروع کد:</strong> همه کدها باید با <code>.si.</code> شروع شوند.</p>
+
+        <div class="code-block">
+            <span class="comment"># شروع کد سیمین</span>
+            <span class="keyword">.si.</span> 
+        </div>
+
+        <p><strong>📌 متغیرها:</strong> با <code>.</code> شروع می‌شوند.</p>
+        <div class="code-block">
+            <span class="variable">.name</span> <span class="operator">=</span> <span class="string">"علی"</span>
+            <span class="variable">.age</span> <span class="operator">=</span> <span class="number">25</span>
+        </div>
+
+        <p><strong>📌 چاپ:</strong> با <code>p</code></p>
+        <div class="code-block">
+            <span class="keyword">p</span> <span class="string">"سلام دنیا!"</span>
+            <span class="keyword">p</span> <span class="variable">.name</span>
+        </div>
+
+        <p><strong>📌 ورودی:</strong> با <code>i</code></p>
+        <div class="code-block">
+            <span class="variable">.name</span> <span class="operator">=</span> <span class="keyword">i</span> <span class="string">"اسمت چیه؟ "</span>
+            <span class="keyword">p</span> <span class="string">"سلام "</span> <span class="operator">+</span> <span class="variable">.name</span>
+        </div>
+
+        <p><strong>📌 شرط:</strong> <code>if</code> و <code>el</code></p>
+        <div class="code-block">
+            <span class="keyword">if</span> <span class="variable">.age</span> <span class="operator">>=</span> <span class="number">18</span>
+                <span class="keyword">p</span> <span class="string">"بزرگسال"</span>
+            <span class="keyword">el</span>
+                <span class="keyword">p</span> <span class="string">"کودک"</span>
+            <span class="keyword">end</span>
+        </div>
+
+        <p><strong>📌 حلقه for:</strong></p>
+        <div class="code-block">
+            <span class="keyword">for</span> i <span class="operator">=</span> <span class="number">1</span> <span class="keyword">to</span> <span class="number">10</span>
+                <span class="keyword">p</span> i
+            <span class="keyword">end</span>
+
+            <span class="comment"># با گام</span>
+            <span class="keyword">for</span> i <span class="operator">=</span> <span class="number">1</span> <span class="keyword">to</span> <span class="number">10</span> <span class="keyword">step</span> <span class="number">2</span>
+                <span class="keyword">p</span> i
+            <span class="keyword">end</span>
+
+            <span class="comment"># روی آرایه</span>
+            <span class="keyword">for</span> item <span class="keyword">in</span> <span class="variable">.list</span>
+                <span class="keyword">p</span> item
+            <span class="keyword">end</span>
+        </div>
+
+        <p><strong>📌 حلقه while:</strong></p>
+        <div class="code-block">
+            <span class="variable">.x</span> <span class="operator">=</span> <span class="number">1</span>
+            <span class="keyword">while</span> <span class="variable">.x</span> <span class="operator"><=</span> <span class="number">5</span>
+                <span class="keyword">p</span> <span class="variable">.x</span>
+                <span class="variable">.x</span> <span class="operator">=</span> <span class="variable">.x</span> <span class="operator">+</span> <span class="number">1</span>
+            <span class="keyword">end</span>
+        </div>
+
+        <p><strong>📌 تابع:</strong> با <code>def</code></p>
+        <div class="code-block">
+            <span class="keyword">def</span> <span class="function">sum</span>(a, b)
+                <span class="keyword">return</span> a <span class="operator">+</span> b
+            <span class="keyword">end</span>
+
+            <span class="variable">.result</span> <span class="operator">=</span> <span class="function">sum</span>(<span class="number">5</span>, <span class="number">3</span>)
+            <span class="keyword">p</span> <span class="variable">.result</span>
+        </div>
+
+        <p><strong>📌 آرایه:</strong></p>
+        <div class="code-block">
+            <span class="variable">.nums</span> <span class="operator">=</span> <span class="string">[</span><span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span><span class="string">]</span>
+            <span class="keyword">p</span> <span class="variable">.nums</span><span class="string">[</span><span class="number">0</span><span class="string">]</span>  <span class="comment"># ۱</span>
+            <span class="keyword">p</span> <span class="function">len</span>(<span class="variable">.nums</span>)    <span class="comment"># ۵</span>
+            <span class="variable">.nums</span>.<span class="function">append</span>(<span class="number">6</span>)     <span class="comment"># افزودن</span>
+        </div>
+
+        <p><strong>📌 دیکشنری:</strong></p>
+        <div class="code-block">
+            <span class="variable">.person</span> <span class="operator">=</span> <span class="string">{</span><span class="string">"name"</span>: <span class="string">"علی"</span>, <span class="string">"age"</span>: <span class="number">25</span><span class="string">}</span>
+            <span class="keyword">p</span> <span class="variable">.person</span><span class="string">[</span><span class="string">"name"</span><span class="string">]</span>  <span class="comment"># علی</span>
+            <span class="keyword">p</span> <span class="function">keys</span>(<span class="variable">.person</span>)     <span class="comment"># ["name", "age"]</span>
+        </div>
+
+        <p><strong>📌 تاریخ و زمان:</strong></p>
+        <div class="code-block">
+            <span class="keyword">p</span> <span class="function">time</span>()    <span class="comment"># زمان فعلی</span>
+            <span class="keyword">p</span> <span class="function">date</span>()    <span class="comment"># تاریخ فعلی</span>
+            <span class="keyword">p</span> <span class="function">year</span>()    <span class="comment"># سال</span>
+            <span class="keyword">p</span> <span class="function">month</span>()   <span class="comment"># ماه</span>
+            <span class="keyword">p</span> <span class="function">day</span>()     <span class="comment"># روز</span>
+        </div>
+    </div>
+
+    <!-- ===== توابع داخلی ===== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon">🔧</span>
+            توابع داخلی
+            <span class="line"></span>
+        </div>
+        <div class="func-list">
+            <div class="func-item"><span class="name">len()</span><span class="desc">طول آرایه/رشته</span></div>
+            <div class="func-item"><span class="name">append()</span><span class="desc">افزودن به آرایه</span></div>
+            <div class="func-item"><span class="name">insert()</span><span class="desc">درج در آرایه</span></div>
+            <div class="func-item"><span class="name">remove()</span><span class="desc">حذف از آرایه</span></div>
+            <div class="func-item"><span class="name">keys()</span><span class="desc">کلیدهای دیکشنری</span></div>
+            <div class="func-item"><span class="name">values()</span><span class="desc">مقادیر دیکشنری</span></div>
+            <div class="func-item"><span class="name">pow()</span><span class="desc">توان</span></div>
+            <div class="func-item"><span class="name">sqrt()</span><span class="desc">ریشه دوم</span></div>
+            <div class="func-item"><span class="name">abs()</span><span class="desc">قدر مطلق</span></div>
+            <div class="func-item"><span class="name">min()</span><span class="desc">کمترین مقدار</span></div>
+            <div class="func-item"><span class="name">max()</span><span class="desc">بیشترین مقدار</span></div>
+            <div class="func-item"><span class="name">sum()</span><span class="desc">جمع آرایه</span></div>
+            <div class="func-item"><span class="name">time()</span><span class="desc">زمان فعلی</span></div>
+            <div class="func-item"><span class="name">date()</span><span class="desc">تاریخ فعلی</span></div>
+            <div class="func-item"><span class="name">year()</span><span class="desc">سال</span></div>
+            <div class="func-item"><span class="name">month()</span><span class="desc">ماه</span></div>
+            <div class="func-item"><span class="name">day()</span><span class="desc">روز</span></div>
+            <div class="func-item"><span class="name">hour()</span><span class="desc">ساعت</span></div>
+            <div class="func-item"><span class="name">minute()</span><span class="desc">دقیقه</span></div>
+            <div class="func-item"><span class="name">second()</span><span class="desc">ثانیه</span></div>
+        </div>
+    </div>
+
+    <!-- ===== مثال کامل ===== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon">🎯</span>
+            مثال کامل
+            <span class="line"></span>
+        </div>
+        <div class="code-block">
+            <span class="comment"># برنامه کامل سیمین</span>
+            <span class="keyword">.si.</span>
+
+            <span class="comment"># ورودی</span>
+            <span class="variable">.name</span> <span class="operator">=</span> <span class="keyword">i</span> <span class="string">"اسمت چیه؟ "</span>
+            <span class="variable">.age</span> <span class="operator">=</span> <span class="keyword">i</span> <span class="string">"چند سالته؟ "</span>
+
+            <span class="comment"># شرط</span>
+            <span class="keyword">if</span> <span class="variable">.age</span> <span class="operator">>=</span> <span class="number">18</span>
+                <span class="keyword">p</span> <span class="string">"سلام "</span> <span class="operator">+</span> <span class="variable">.name</span> <span class="operator">+</span> <span class="string">"! تو بزرگسالی 🧑"</span>
+            <span class="keyword">el</span>
+                <span class="keyword">p</span> <span class="string">"سلام "</span> <span class="operator">+</span> <span class="variable">.name</span> <span class="operator">+</span> <span class="string">"! تو جوانی 👶"</span>
+            <span class="keyword">end</span>
+
+            <span class="comment"># آرایه</span>
+            <span class="variable">.nums</span> <span class="operator">=</span> <span class="string">[</span><span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span><span class="string">]</span>
+            <span class="keyword">p</span> <span class="string">"آرایه: "</span> <span class="operator">+</span> <span class="variable">.nums</span>
+
+            <span class="comment"># حلقه</span>
+            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">.nums</span>
+                <span class="keyword">p</span> <span class="string">"عدد: "</span> <span class="operator">+</span> i
+            <span class="keyword">end</span>
+
+            <span class="comment"># تابع</span>
+            <span class="keyword">def</span> <span class="function">sum_list</span>(list)
+                <span class="variable">.total</span> <span class="operator">=</span> <span class="number">0</span>
+                <span class="keyword">for</span> i <span class="keyword">in</span> list
+                    <span class="variable">.total</span> <span class="operator">=</span> <span class="variable">.total</span> <span class="operator">+</span> i
+                <span class="keyword">end</span>
+                <span class="keyword">return</span> <span class="variable">.total</span>
+            <span class="keyword">end</span>
+
+            <span class="keyword">p</span> <span class="string">"مجموع: "</span> <span class="operator">+</span> <span class="function">sum_list</span>(<span class="variable">.nums</span>)
+
+            <span class="comment"># تاریخ و زمان</span>
+            <span class="keyword">p</span> <span class="string">"زمان: "</span> <span class="operator">+</span> <span class="function">time</span>()
+            <span class="keyword">p</span> <span class="string">"تاریخ: "</span> <span class="operator">+</span> <span class="function">date</span>()
+            <span class="keyword">p</span> <span class="string">"✨ سیمین - زبان نقره‌ای"</span>
+        </div>
+    </div>
+
+    <!-- ===== دانلود ===== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon">📥</span>
+            دانلود و دسترسی
+            <span class="line"></span>
+        </div>
+        <div class="download-box">
+            <span class="big-icon">🚀</span>
+            <p style="margin-bottom:12px;">
+                برای دانلود و استفاده از زبان سیمین، به سایت رسمی مراجعه کنید:
+            </p>
+            <div class="url">
+                <a href="https://simin.lxb.ir" target="_blank">🌐 simin-coding.lxb.ir</a>
+            </div>
+            <p style="margin-top:14px; font-size:0.8rem; color:#6a7a9a;">
+                📂 فایل‌های با پسوند <strong style="color:#f5c542;">.sim</strong> را بارگذاری کنید
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== وضعیت ===== -->
+    <div class="section">
+        <div class="section-title">
+            <span class="icon">🔄</span>
+            وضعیت توسعه
+            <span class="line"></span>
+        </div>
+        <p>
+            <span class="status-badge"><span class="pulse-dot"></span> در حال توسعه فعال</span>
+        </p>
+        <p style="margin-top:10px;">
+            زبان سیمین هنوز در مراحل تکمیل است و روزبه‌روز قابلیت‌های جدید به آن اضافه می‌شود.
+            اگر پیشنهاد یا ایده‌ای دارید، خوشحال می‌شویم بشنویم!
+        </p>
+        <p style="margin-top:6px; font-size:0.8rem; color:#6a7a9a;">
+            ✅ نسخه فعلی: ۲.۰ | 🎯 نسخه بعدی: ۲.۱ (به زودی)
+        </p>
+    </div>
+
+    <!-- ===== Footer ===== -->
+    <div class="footer">
+        <div class="credit">
+            تهیه شده توسط <span class="highlight">هنرجویان هنرستان ابوتراب ۲</span>
+            <span class="heart">❤️</span>
+        </div>
+        <div class="badge">✨ سیمین v2.0 | زبان نقره‌ای</div>
+        <div class="version-info">✨ زبان برنامه‌نویسی سیمین - در حال تکمیل</div>
+    </div>
+
+</div>
+
+<!-- ===== Stars Script ===== -->
+<script>
+    (function() {
+        const starsContainer = document.getElementById('stars');
+        const count = 120;
+
+        for (let i = 0; i < count; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = (Math.random() * 2.5 + 1) + 'px';
+            star.style.height = star.style.width;
+            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            star.style.animationDelay = (Math.random() * 3) + 's';
+            starsContainer.appendChild(star);
+        }
+    })();
+</script>
+
+</body>
+</html>
